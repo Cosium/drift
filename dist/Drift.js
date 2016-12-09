@@ -196,6 +196,8 @@ module.exports = function () {
         inlineOffsetX = _options$inlineOffset === undefined ? 0 : _options$inlineOffset,
         _options$inlineOffset2 = options.inlineOffsetY,
         inlineOffsetY = _options$inlineOffset2 === undefined ? 0 : _options$inlineOffset2,
+        _options$inlineContai = options.inlineContainer,
+        inlineContainer = _options$inlineContai === undefined ? document.body : _options$inlineContai,
         _options$sourceAttrib = options.sourceAttribute,
         sourceAttribute = _options$sourceAttrib === undefined ? 'data-zoom' : _options$sourceAttrib,
         _options$zoomFactor = options.zoomFactor,
@@ -224,8 +226,11 @@ module.exports = function () {
     if (inlinePane !== true && !(0, _dom.isDOMElement)(paneContainer)) {
       throw new TypeError('`paneContainer` must be a DOM element when `inlinePane !== true`');
     }
+    if (!(0, _dom.isDOMElement)(inlineContainer)) {
+      throw new TypeError('`inlineContainer` must be a DOM element');
+    }
 
-    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
+    this.settings = { namespace: namespace, showWhitespaceAtEdges: showWhitespaceAtEdges, containInline: containInline, inlineOffsetX: inlineOffsetX, inlineOffsetY: inlineOffsetY, inlineContainer: inlineContainer, sourceAttribute: sourceAttribute, zoomFactor: zoomFactor, paneContainer: paneContainer, inlinePane: inlinePane, handleTouch: handleTouch, onShow: onShow, onHide: onHide, injectBaseStyles: injectBaseStyles, hoverDelay: hoverDelay, touchDelay: touchDelay, hoverBoundingBox: hoverBoundingBox, touchBoundingBox: touchBoundingBox };
 
     if (this.settings.injectBaseStyles) {
       (0, _injectBaseStylesheet2.default)();
@@ -246,7 +251,8 @@ module.exports = function () {
         inline: this.settings.inlinePane,
         namespace: this.settings.namespace,
         inlineOffsetX: this.settings.inlineOffsetX,
-        inlineOffsetY: this.settings.inlineOffsetY
+        inlineOffsetY: this.settings.inlineOffsetY,
+        inlineContainer: this.settings.inlineContainer
       });
     }
   }, {
